@@ -27,7 +27,7 @@ async def dosomething(i: int, delay):
 def async_main():
     start = time.time()
     # 包裝成tasks, 不可直接傳coroutine
-    tasks = (asyncio.create_task(dosomething(i + 1, i + 1)) for i in range(5))
+    tasks = [asyncio.create_task(dosomething(i + 1, i + 1)) for i in range(5)]
     asyncio.run(asyncio.wait(tasks))
     # 5 sec
     print(f"async time: {(time.time() - start):.2f} (s)")
@@ -58,5 +58,5 @@ def async_main2():
 
 if __name__ == "__main__":
     # block_main()
-    # async_main()
-    async_main2()
+    async_main()
+    # async_main2()
