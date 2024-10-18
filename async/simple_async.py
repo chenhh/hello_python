@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# python 3.11
+# async 3.11
 import asyncio
 import time
 
@@ -18,7 +18,7 @@ def block_main():
     print(f"block time: {(time.time() - start):.2f} (s)")
 
 
-async def dosomething(i: int, delay):
+async def dosomething(i: int, delay: int):
     print(f"第 {i} 次開始")
     await asyncio.sleep(i, delay)
     print(f"第 {i} 次結束")
@@ -27,6 +27,7 @@ async def dosomething(i: int, delay):
 def async_main():
     start = time.time()
     # 包裝成tasks, 不可直接傳coroutine
+    # tasks = [dosomething(i + 1, i + 1) for i in range(5)]
     tasks = [asyncio.create_task(dosomething(i + 1, i + 1)) for i in range(5)]
     asyncio.run(asyncio.wait(tasks))
     # 5 sec

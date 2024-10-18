@@ -1,2 +1,2 @@
-# hello_async_programming
-example of async programming
+# hello_python
+example of python snippets
