@@ -8,7 +8,7 @@ async def do_async_job() -> int:
     print(datetime.now().isoformat(), 'thread id', threading.current_thread().ident)
     return random.randint(1, 10)
 
-async def main():
+async def main() ->None:
     # 依順序進行，每一次都會sleep，沒有切換工作
     # await do_async_job()
     # await do_async_job()
@@ -21,6 +21,12 @@ async def main():
     return_values = await asyncio.gather(job1, job2, job3)
     for v in return_values:
         print(f'result => {v}')
+
+    # 也可用list包裝
+    jobs = [do_async_job() for _ in range(3)]
+    return_values = await asyncio.gather(*jobs)
+    for v in return_values:
+        print(f'result2 => {v}')
 
 
 asyncio.run(main())
